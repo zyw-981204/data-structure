@@ -17,7 +17,6 @@ const debounceFun = function() {
     console.log(123)
 }
 
-
 const fun = debounce(debounceFun, 1000);
 
 

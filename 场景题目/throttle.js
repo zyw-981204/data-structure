@@ -1,6 +1,6 @@
 function throttle(fun, delay) {
     let flag = true;
-    return (...args) => {
+    return function (...args) {
         const context = this;
         if (!flag) {
             return;
