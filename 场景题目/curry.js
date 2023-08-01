@@ -1,18 +1,35 @@
-function curry(fun, args) {
-    const length = fun.length;
-    const array = args || [];
-    return function () {
-        const nextArgs = array.slice()
-        for (let arg of arguments) {
-            nextArgs.push(arg)
-        }
+// function curry(fun, args) {
+//     const length = fun.length;
+//     const array = args || [];
+//     return function () {
+//         const nextArgs = array.slice()
+//         for (let arg of arguments) {
+//             nextArgs.push(arg)
+//         }
 
+//         if (nextArgs.length >= length) {
+//             return fun.apply(this, nextArgs)
+//         } else {
+//             return curry.call(this, fun, nextArgs)
+//         }
+//     }
+// }
+
+function curry(fun, args) {
+    let length = fun.length;
+    const array = args || [];
+    return function() {
+        const nextArgs = [...array];
+        for(let i = 0; i < arguments.length; i++) {
+            nextArgs.push(arguments[i]);
+        }
         if (nextArgs.length >= length) {
             return fun.apply(this, nextArgs)
         } else {
             return curry.call(this, fun, nextArgs)
         }
     }
+
 }
 
 function sum(a, b, c) {
@@ -27,3 +44,7 @@ console.log(curried(1, 2, 3)) // 6
 //如果传入了部分的参数，此时它会返回当前函数，并且等待接收 sum 中的剩余参数
 console.log(curried(1)(2, 3)) // 6
 console.log(curried(1, 2)(3)) // 6
+
+
+
+
