@@ -4,6 +4,8 @@
  * [11] 盛最多水的容器
  */
 
+
+
 // @lc code=start
 function maxArea(height: number[]): number {
     const calc = (left, right) => {
