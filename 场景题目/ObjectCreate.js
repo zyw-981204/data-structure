@@ -5,6 +5,3 @@ function Create(obj) {
     Cons.prototype = obj;
     return new Cons()
 }
-
-
-

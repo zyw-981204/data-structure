@@ -13,8 +13,6 @@ function shallowCopy(obj) {
 }
 
 
-const weakMap = new WeakMap()
-
 function deepClone(obj, map = new WeakMap()) {
     if (obj === null || typeof obj !== "object") {
         return obj

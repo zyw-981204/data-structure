@@ -1,36 +1,25 @@
-// function curry(fun, args) {
-//     const length = fun.length;
-//     const array = args || [];
-//     return function () {
-//         const nextArgs = array.slice()
-//         for (let arg of arguments) {
-//             nextArgs.push(arg)
-//         }
-
-//         if (nextArgs.length >= length) {
-//             return fun.apply(this, nextArgs)
-//         } else {
-//             return curry.call(this, fun, nextArgs)
-//         }
-//     }
-// }
-
 function curry(fun, args) {
-    let length = fun.length;
+    if (typeof fun !== 'function') {
+        throw ('type error')
+    }
+    const length = fun.length;
     const array = args || [];
-    return function() {
-        const nextArgs = [...array];
-        for(let i = 0; i < arguments.length; i++) {
-            nextArgs.push(arguments[i]);
+
+    return function () {
+        const nextArray = array.slice();
+        for (let i = 0; i < arguments.length; i++) {
+            nextArray.push(arguments[i]);
         }
-        if (nextArgs.length >= length) {
-            return fun.apply(this, nextArgs)
+
+        if (nextArray.length >= length) {
+            return fun.apply(this, nextArray)
         } else {
-            return curry.call(this, fun, nextArgs)
+            return curry.call(this, fun, nextArray)
         }
     }
 
 }
+
 
 function sum(a, b, c) {
     return a + b + c

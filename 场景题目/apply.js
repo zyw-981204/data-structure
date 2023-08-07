@@ -20,4 +20,20 @@ function sayHello(aaa) {
 let person = { name: "张三" };
 sayHello(person);
 sayHello.apply();
-sayHello.apply(person, [1,2 ]);
+sayHello.apply(person, [1, 2]);
+
+
+
+// // 传进来时obj， args
+// function myApply(obj, args) {
+//   if (typeof this !== 'function') {
+//     throw ('error ')
+//   }
+//   const context = obj || globalThis;
+//   const symbol = Symbol('1');
+//   const fun = this;
+//   context[symbol] = fun;
+//   const res = context[symbol](...args);
+//   delete context[symbol];
+//   return res;
+// }

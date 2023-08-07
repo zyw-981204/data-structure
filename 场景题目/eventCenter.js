@@ -9,7 +9,6 @@ class EventCenter {
             }
 
             return () => {
-                debugger
                 this.handlers[key] = this.handlers[key].filter(item => item !== cb)
             }
         }
