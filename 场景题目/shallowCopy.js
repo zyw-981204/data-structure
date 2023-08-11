@@ -31,3 +31,16 @@ function deepClone(obj, map = new WeakMap()) {
 
     return newObject;
 }
+// Test the deepClone function
+const obj1 = {
+    a: 1,
+    b: [1, 2, 3],
+    c: {
+        d: 4
+    }
+};
+
+const obj2 = deepClone(obj1);
+
+console.log(obj2); // Should output a deep copy of obj1
+
