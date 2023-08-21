@@ -44,3 +44,26 @@ const obj2 = deepClone(obj1);
 
 console.log(obj2); // Should output a deep copy of obj1
 
+
+
+
+function deep(obj, map = new WeakMap()) {
+    if (typeof obj !== 'object' && obj === null) {
+        return obj
+    }
+    if (map.has(obj)) {
+        return map.get(obj)
+    }
+    let newObj = null;
+    if (obj instanceof Map) {
+        newObj = new Map(obj.entries().map(([key, value]) => ([deepClone(key), deepClone(value)])));
+    }
+
+    // 处理 Date & Regex & Map Set
+    newObj = Array.isArray(obj) ? [] : {};
+    map.set(obj, newObj);
+    Object.keys(obj).forEach((key) => {
+        newObj[key] = deep(obj[key], map)
+    });
+    return newObj
+}

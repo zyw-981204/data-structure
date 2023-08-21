@@ -23,23 +23,50 @@
 
 
 
+// function promiseAll(promises) {
+//     return new Promise((resolve, reject) => {
+//         if (!Array.isArray(promises)) {
+//             throw ('promises 需要是可迭代的对象')
+//         }
+//         let i = 0;
+//         const res = [];
+//         for (const key in promises) {
+//             const promise = promises[key];
+//             Promise.resolve(promise).then(value => {
+//                 res[key] = value;
+//                 i++;
+//                 if (i === promises.length) {
+//                     resolve(res)
+//                 }
+//             }).catch(err => {
+//                 reject(err);
+//             })
+//         }
+//     })
+// }
+
+
+
 function promiseAll(promises) {
+    debugger
     return new Promise((resolve, reject) => {
         if (!Array.isArray(promises)) {
-            throw ('promises 需要是可迭代的对象')
+            reject('123')
         }
-        let i = 0;
-        const res = [];
-        for (const key in promises) {
-            const promise = promises[key];
+        const result = [];
+        let count = 0;
+        for (let i = 0; i < promises.length; i++) {
+            const promise = promises[i];
             Promise.resolve(promise).then(value => {
-                res[key] = value;
-                i++;
-                if (i === promises.length) {
-                    resolve(res)
+                count++;
+                console.log(count);
+                result[i] = value;
+                if (count === promises.length) {
+                    debugger
+                    resolve(result)
                 }
             }).catch(err => {
-                reject(err);
+                reject(err)
             })
         }
     })
@@ -49,14 +76,13 @@ function promiseAll(promises) {
 // test
 let p1 = new Promise(function (resolve, reject) {
     setTimeout(function () {
-        // throw (11111)
         resolve(1)
     }, 1000)
 })
 let p2 = new Promise(function (resolve, reject) {
     setTimeout(function () {
         resolve(2)
-    }, 2000)
+    }, 1000)
 })
 let p3 = new Promise(function (resolve, reject) {
     setTimeout(function () {

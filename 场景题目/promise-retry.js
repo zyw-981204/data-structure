@@ -28,4 +28,26 @@ function runner() {
     return true
 }
 
+
+
+function promiseRetry(fun, times) {
+    return function () {
+        let tryTime = 0
+        return new Promise(async (resolve, reject) => {
+            function runner() {
+                if (tryTime > times) {
+                    reject()
+                }
+                try {
+                    const res = await fun()
+                    reject(res);
+                } catch (error) {
+                    tryTime++;
+                    runner()
+                }
+            }
+        })
+    }
+}
+
 promiseRetry(runner, 10)()
